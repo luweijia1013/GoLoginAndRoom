@@ -32,6 +32,7 @@ func (this *User) Loop() {
 		}
 
 		if strings.HasPrefix(string(line), "[login]") {
+			//TODO check key from dbserver(RPC)
 			this.isLogin = true
 			continue
 		}
@@ -40,7 +41,7 @@ func (this *User) Loop() {
 			continue
 		}
 
-		log.Println("recv data:", string(line), ", from ", this.conn.RemoteAddr())
+		log.Println("user server recv data:", string(line), ", from ", this.conn.RemoteAddr())
 
 		UserMgr_GetMe().SendAll(string(line), this.Id)
 	}
